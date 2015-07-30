@@ -1,5 +1,6 @@
 package CalAssignment;
 
+
 /**
  * GreatCircle
  * Calculates distance between two locations given their positions in decimal degrees.

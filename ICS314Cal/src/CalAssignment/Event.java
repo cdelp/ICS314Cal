@@ -1,5 +1,6 @@
 package CalAssignment;
 
+
 /**
  * Event
  * class Event, sets all event fields by building strings

@@ -3,6 +3,7 @@ package CalAssignment;
 import java.util.Collections;
 import java.util.Iterator;
 
+
 /**
  * AddComment
  * Adds COMMENT field to event with distance to next event
