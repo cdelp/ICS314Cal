@@ -4,8 +4,6 @@ package CalAssignment;
  * GreatCircle
  * Calculates distance between two locations given their positions in decimal degrees.
  * 
- * NOT INTEGRATED IN PROJECT YET
- * 
  * Referenced:
  * http://edndoc.esri.com/arcobjects/9.0/Samples/Geometry/Great_Circle_Distance.htm
  * http://introcs.cs.princeton.edu/java/12types/GreatCircle.java.html
@@ -17,6 +15,15 @@ public class GreatCircle {
 	private double milesPerDegree = 69.05;
 	private double kmPerDegree = 111.12;
 	
+	/**
+	 * circleDistance
+	 * calculates distance between two geographic points
+	 * @param lat1, latitude for first event
+	 * @param lon1  longitude for first event
+	 * @param lat2  latitude for second event
+	 * @param lon2  longitude for second event
+	 * @return distance in decimal degrees
+	 */
 	public double circleDistance(double lat1, double lon1, 
 			double lat2, double lon2) {
 		

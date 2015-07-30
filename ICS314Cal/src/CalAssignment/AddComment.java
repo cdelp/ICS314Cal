@@ -5,25 +5,29 @@ import java.util.Iterator;
 
 /**
  * AddComment
- * @author TeamElara
  * Adds COMMENT field to event with distance to next event
+ * 	when geographic positions are provided for both events.
+ * @author TeamElara 
  */
 public class AddComment {
 
 	/**
 	 * addComment, iterates through arraylist of events, calling GreatCircle
-	 * when geographic positions are available.
+	 * when geographic positions are available for both events.
 	 * @param cal, calendar object generated at time of reading
 	 */
 	public void addComment(CalObj cal) {
 		
 		GreatCircle gc = new GreatCircle();
+		//sorting arraylist of events based on start time
 		Collections.sort(cal.getEventArray());
 	
 		Iterator<Event> itr = cal.getEventArray().iterator();
 		
+		//counter used for skipping first event
 		int eCount = 0;
 		
+		//iterates through list of events, adding great circle distance when appropriate
 		while(itr.hasNext()) {
 			
 			itr.next();
@@ -45,7 +49,7 @@ public class AddComment {
 					previous.setComment(gc.miles(lat1, long1, lat2, long2), 
 							gc.km(lat1, long1, lat2, long2));
 					
-					//testing only
+					//testing output only
 					System.out.println("Added to " + previous.getEventSummary() + previous.getEventStartTime() 
 						+ previous.getEventComment());
 				}

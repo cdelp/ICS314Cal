@@ -1,23 +1,28 @@
 package CalAssignment;
 import java.io.File;
-import java.util.Collections;
-
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
  * Interface
- * creates the javax user interface, takes user input
+ * Creates the javax user interface, takes user input.
+ * First, repeatedly prompts user to select files for reading. Calls read method with
+ * 	user selected filenames.
+ * 	Calls AddComment class for sorting and comment adding once the user has finished
+ * 	reading files.
+ * Second prompts user to create new file.
+ * Third creates event file using user input info.
  * @author TeamElara
  */
 public class Interface {
 
-	/* Used for determining whether user has entered geo pos and classification info.
-	 * both within this classes' createEvent method, and CalObj's write method, 
+	/* Signifies whether user has entered geographic positioning, 
+	 * classification, or time zone info.
+	 * Used both within this classes' createEvent method, and CalObj's write method. 
 	 */ 
-	private static boolean geoInfo;
-	private static boolean classInfo;
-	private static boolean tzInfo;
+	private static boolean hasGeoInfo;
+	private static boolean hasClassInfo;
+	private static boolean hasTZInfo;
 	
 	/**
 	 * main
@@ -29,14 +34,19 @@ public class Interface {
 		Event event = new Event();
 		StringBuilder builder = new StringBuilder();
 		
-		//prompts user to to select file for reading
-		while (JOptionPane.showConfirmDialog(null, "Would you like to read an existing event file?", "file", JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
+		// Prompts user to to select file for reading.
+		while (JOptionPane.showConfirmDialog(null, "Would you like to read an existing event file?"
+				, "file", JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
+			
 			JFileChooser reader = new JFileChooser();
 			File f = new File("/Users");
 			File path;
 			String filename;
+			
 			reader.setCurrentDirectory(f);
 			reader.setDialogTitle("Choose a file");
+			
+			//Calls read method with selected filename.
 			if(reader.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 				path = reader.getSelectedFile();
 				filename = path.getName();
@@ -44,7 +54,8 @@ public class Interface {
 			} 		
 		}
 		
-		// sorts events and adds comment section if more than one event read
+		// If more than one event file has been read, AddComment class is called to sort by 
+		// date and time, and add distance comments if appropriate.
 		if(calendar.getEventArray().size() > 1) {
 			AddComment ac = new AddComment();
 			ac.addComment(calendar);
@@ -56,8 +67,9 @@ public class Interface {
 			builder.append(prompts[i] + ", ");
 		}
 		
-		// optional prompts for GPS coordinates
-		if(JOptionPane.showConfirmDialog(null, "Would you like to set a geographic position?", "Geographic Position", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+		// Prompts for optional GPS coordinates. Sets hasGeoInfo to true is user chose to this option.
+		if(JOptionPane.showConfirmDialog(null, "Would you like to set a geographic position?",
+				"Geographic Position", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			String[] optionalPrompts = getOptionalGeoPrompts();
 			for(int i = 0; i < optionalPrompts.length; i++) {
 				builder.append(optionalPrompts[i] + ", ");
@@ -65,8 +77,9 @@ public class Interface {
 			setGeoInfo(true);
 		}
 		
-		// optional prompts for setting classification
-		if(JOptionPane.showConfirmDialog(null, "Would you like to set an access classification?", "Classification", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+		// Prompts for optional classification info. Sets hasClassInfo to true is user chose to this option.
+		if(JOptionPane.showConfirmDialog(null, "Would you like to set an access classification?",
+				"Classification", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			String[] optionalPrompts = getOptionalClassificationPrompts();
 			for(int i = 0; i < optionalPrompts.length; i++) {
 				builder.append(optionalPrompts[i] + ", ");
@@ -74,8 +87,9 @@ public class Interface {
 			setClassInfo(true);
 		}
 		
-		// optional prompts for setting time zone
-		if(JOptionPane.showConfirmDialog(null, "Would you like to set a timezone?", "Timezone", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+		// Prompts for optional time zone info. Sets hasTZInfo to true is user chose to this option.
+		if(JOptionPane.showConfirmDialog(null, "Would you like to set a timezone?", "Timezone",
+				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			String[] optionalPrompts = getOptionalTimezonePrompts();
 			for(int i = 0; i < optionalPrompts.length; i++) {
 				builder.append(optionalPrompts[i] + ", ");
@@ -185,10 +199,10 @@ public class Interface {
 	 */
 	public static void addToCalendar(CalObj calendar, Event event) { calendar.addEvent(event); }
 	// setters and getters for geographic info, classification, and timezone
-	private static void setGeoInfo(boolean b) { geoInfo = b; }
-	public static boolean getGeoInfo() { return geoInfo; }
-	private static void setClassInfo(boolean b) { classInfo = b; }
-	public static boolean getClassInfo() { return classInfo; }
-	public static void setTzInfo(boolean b) { tzInfo = b; }
-	public static boolean getTzInfo() { return tzInfo; }
+	private static void setGeoInfo(boolean b) { hasGeoInfo = b; }
+	public static boolean getGeoInfo() { return hasGeoInfo; }
+	private static void setClassInfo(boolean b) { hasClassInfo = b; }
+	public static boolean getClassInfo() { return hasClassInfo; }
+	public static void setTzInfo(boolean b) { hasTZInfo = b; }
+	public static boolean getTzInfo() { return hasTZInfo; }
 }

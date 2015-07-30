@@ -8,6 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * CalObj, calendar object
+ * Creates an arraylist of events.
+ * Writes to files.
+ * Reads files.
+ * @author TeamElara
+ */
 public class CalObj {
 	
 	private String 
@@ -143,11 +150,18 @@ public class CalObj {
 		}		
 	}
 	
-	//Created getters and setters for eventArray for testing. Can remove if not necessary later.
+	/**
+	 * getEventArray
+	 * @return eventArray, containing all event info
+	 */
 	public ArrayList<Event> getEventArray() {
 		return eventArray;
 	}
 
+	/**
+	 * setEventArray
+	 * @param eventArray
+	 */
 	public void setEventArray(ArrayList<Event> eventArray) {
 		this.eventArray = eventArray;
 	}

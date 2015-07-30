@@ -2,21 +2,17 @@ package CalAssignment;
 
 /**
  * Event
- * class Event
+ * class Event, sets all event fields by building strings
+ * 	and appending required info. 
+ * Contains compareTo method, sorting events based on start times.
  * @author TeamElara
- *
  */
 public class Event implements Comparable<Event> {
 	private String eventSummary, 
 		eventStartTime, 
 		eventEndTime,
 		eventUid, 
-		eventTimezone, // we either need to put this in automatically, or ask user to put in (optional or mandatory)
-		// if asking, see RFC 5545 page 27 section 3.2.19 Time Zone Identifier at https://tools.ietf.org/html/rfc5545#section-3.2.19
-		// TZID=America/New_York is appended after DTSTART;, precedes the time (I think).
-		// so code has to be flexible so that we can throw the time zone inbetween DTSTART and the entered time 
-		// (i.e., private variables eventStartTime and eventEndTime being String ArrayList or something so we can push inbetween their contents)
-		// essentially, TZID for timezone is an extra parameter of DTSTART start time, not its own specification
+		eventTimezone, 
 		eventGeoPos, 
 		eventClass,
 		eventComment;
@@ -194,12 +190,12 @@ public class Event implements Comparable<Event> {
 	public String getEventClass() { return eventClass; }
 	public String getEventComment() { return eventComment; }
 
+	
 	@Override
 	public int compareTo(Event e) {
 		String[] date1 = getEventStartTime().split("[:]");
 		String[] date2 = e.getEventStartTime().split("[:]");
 		
-		//int comp = date1[1].compareTo(date2[1]);
 		return date1[1].compareTo(date2[1]);
 	}
 
