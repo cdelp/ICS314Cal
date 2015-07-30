@@ -1,5 +1,7 @@
 package CalAssignment;
 import java.io.File;
+
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -61,6 +63,22 @@ public class Interface {
 			ac.addComment(calendar);
 		}
 		
+		//displaying newly read events for user, sorted and with comments
+		JOptionPane filesRead = new JOptionPane();
+		for (int i = 0; i < calendar.getEventArray().size(); i++) {
+			Event e = calendar.getEventArray().get(i);
+			filesRead.setMessage(e.getEventSummary() + 
+					e.getEventStartTime() +
+					e.getEventEndTime() +
+					e.getEventUid() +
+					e.getEventGeoPos() + 
+					e.getEventClass() +
+					e.getEventComment());
+			filesRead.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+			JDialog dialog = filesRead.createDialog(null, "Event " + (i+1));
+			dialog.setVisible(true);
+		}
+				
 		// ask information to setup base event
 		String[] prompts = getEventPrompts();
 		for(int i = 0; i < prompts.length; i++) {
