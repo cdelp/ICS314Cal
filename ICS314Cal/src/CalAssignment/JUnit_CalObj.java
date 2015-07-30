@@ -8,8 +8,8 @@ public class JUnit_CalObj {
 
 	/**
 	 * JUnit_CalObj
-	 * @author TeamElara
 	 * Testing class for CalObj
+	 * @author TeamElara 
 	 */
 	@Test
 	public void testRead() {

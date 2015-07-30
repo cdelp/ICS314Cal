@@ -6,8 +6,8 @@ import org.junit.Test;
 
 /**
  * JUnit_Event
- * @author TeamElara
  * Testing class for Event
+ * @author TeamElara 
  */
 public class JUnit_Event {
 

@@ -9,8 +9,8 @@ import org.junit.Test;
 
 /**
  * JUnit_AddComment
- * @author TeamElara
  * testing class for AddComment
+ * @author TeamElara
  */
 public class JUnit_AddComment {
 

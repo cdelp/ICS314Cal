@@ -5,7 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * JUnit-GreatCircle, tests GreatCircle class
+ * JUnit-GreatCircle 
+ * tests GreatCircle class
  * @author TeamElara
  */
 public class JUnit_GreatCircle {
