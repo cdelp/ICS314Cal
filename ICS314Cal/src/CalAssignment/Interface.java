@@ -80,46 +80,51 @@ public class Interface {
 			dialog.setVisible(true);
 		}
 				
-		// ask information to setup base event
-		String[] prompts = getEventPrompts();
-		for(int i = 0; i < prompts.length; i++) {
-			builder.append(prompts[i] + ", ");
-		}
-		
-		// Prompts for optional GPS coordinates. Sets hasGeoInfo to true is user chose to this option.
-		if(JOptionPane.showConfirmDialog(null, "Would you like to set a geographic position?",
-				"Geographic Position", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-			String[] optionalPrompts = getOptionalGeoPrompts();
-			for(int i = 0; i < optionalPrompts.length; i++) {
-				builder.append(optionalPrompts[i] + ", ");
+			
+		while (JOptionPane.showConfirmDialog(null, "Would you like to create a new event file?"
+				, "file", JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
+					
+			// ask information to setup base event
+			String[] prompts = getEventPrompts();
+			for(int i = 0; i < prompts.length; i++) {
+				builder.append(prompts[i] + ", ");
 			}
-			setGeoInfo(true);
-		}
-		
-		// Prompts for optional classification info. Sets hasClassInfo to true is user chose to this option.
-		if(JOptionPane.showConfirmDialog(null, "Would you like to set an access classification?",
-				"Classification", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-			String[] optionalPrompts = getOptionalClassificationPrompts();
-			for(int i = 0; i < optionalPrompts.length; i++) {
-				builder.append(optionalPrompts[i] + ", ");
+			
+			// Prompts for optional GPS coordinates. Sets hasGeoInfo to true is user chose to this option.
+			if(JOptionPane.showConfirmDialog(null, "Would you like to set a geographic position?",
+					"Geographic Position", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				String[] optionalPrompts = getOptionalGeoPrompts();
+				for(int i = 0; i < optionalPrompts.length; i++) {
+					builder.append(optionalPrompts[i] + ", ");
+				}
+				setGeoInfo(true);
 			}
-			setClassInfo(true);
-		}
-		
-		// Prompts for optional time zone info. Sets hasTZInfo to true is user chose to this option.
-		if(JOptionPane.showConfirmDialog(null, "Would you like to set a timezone?", "Timezone",
-				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-			String[] optionalPrompts = getOptionalTimezonePrompts();
-			for(int i = 0; i < optionalPrompts.length; i++) {
-				builder.append(optionalPrompts[i] + ", ");
+			
+			// Prompts for optional classification info. Sets hasClassInfo to true is user chose to this option.
+			if(JOptionPane.showConfirmDialog(null, "Would you like to set an access classification?",
+					"Classification", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				String[] optionalPrompts = getOptionalClassificationPrompts();
+				for(int i = 0; i < optionalPrompts.length; i++) {
+					builder.append(optionalPrompts[i] + ", ");
+				}
+				setClassInfo(true);
 			}
-			setTzInfo(true);
+			
+			// Prompts for optional time zone info. Sets hasTZInfo to true is user chose to this option.
+			if(JOptionPane.showConfirmDialog(null, "Would you like to set a timezone?", "Timezone",
+					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				String[] optionalPrompts = getOptionalTimezonePrompts();
+				for(int i = 0; i < optionalPrompts.length; i++) {
+					builder.append(optionalPrompts[i] + ", ");
+				}
+				setTzInfo(true);
+			}
+			
+			// final housekeeping: create event, add to calendar, write to calendar file
+			event = createEvent(event, builder.toString());
+			addToCalendar(calendar, event);
+			calendar.write("calendar");
 		}
-		
-		// final housekeeping: create event, add to calendar, write to calendar file
-		event = createEvent(event, builder.toString());
-		addToCalendar(calendar, event);
-		calendar.write("calendar");
 	}
 	
 	/**
