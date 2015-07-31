@@ -78,6 +78,11 @@ public class CalObj {
 		}
 	}
 	
+	/**
+	 * read
+	 * reads .ics files
+	 * @param name, filename
+	 */
 	public void read(String name){
 
 		String line;
