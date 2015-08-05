@@ -61,14 +61,20 @@ public class CalObj {
 				bw.write( e.getEventStartTime() );
 				bw.write( e.getEventEndTime() );
 				bw.write( e.getEventSummary() );				
-				if(Interface.getGeoInfo()) {
+				if(e.getEventGeoPos() != null) {
 					bw.write( e.getEventGeoPos() );
 				}
-				if(Interface.getClassInfo()) {
+				if(e.getEventClass() != null) {
 					bw.write( e.getEventClass() );
-				}				
+				}	
+				if(i < getEventArray().size() -1) {					
+					bw.write( e.getEventComment() );					
+				}		
+				
+				System.out.println(e.getEventComment());
 	            bw.write(eventEnd);
 	        }
+			
 			bw.write(calEnd);
 			bw.close();
 			System.out.println("Done");
@@ -130,10 +136,11 @@ public class CalObj {
 						else if(tokens[0].equals("TZID")){
 							e.setTimeZone(tokens[1]);
 							System.out.println(tokens[1]);
+							Interface.setTzInfo(true);
 						}
 						else if(tokens[0].equals("GEO")){
 							e.setGeographicPosition(tokens[1]);
-							System.out.println(tokens[1]);
+							System.out.println(tokens[1]);							
 						}
 						else if(tokens[0].equals("CLASS")){
 							e.setClassification(tokens[1]);
@@ -145,11 +152,8 @@ public class CalObj {
 					}
 					this.addEvent(e);
 					System.out.println("\nEnded Reading in event\n");
-				}
-				
-				
-			}
-			
+				}								
+			}			
 			
 		} catch (IOException e) {
 			e.printStackTrace();

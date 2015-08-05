@@ -53,6 +53,8 @@ public class AddComment {
 					//testing output only
 					System.out.println("Added to " + previous.getEventSummary() + previous.getEventStartTime() 
 						+ previous.getEventComment());
+				} else {
+					previous.setComment("no distance available");
 				}
 			}
 

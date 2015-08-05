@@ -181,6 +181,14 @@ public class Event implements Comparable<Event> {
 		  .toString();		 
 	}
 	
+	public void setComment(String comm) {
+		eventComment = new StringBuilder()
+	  	.append("COMMENT:")
+	  	.append(comm)
+	  	.append("\r\n")
+	  .toString();		 
+	}
+	
 	/* getters for all private variables */
 	public String getEventSummary() { return eventSummary; }
 	public String getEventStartTime() { return eventStartTime; }

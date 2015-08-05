@@ -26,6 +26,7 @@ public class Interface {
 	private static boolean hasGeoInfo;
 	private static boolean hasClassInfo;
 	private static boolean hasTZInfo;
+	//private static boolean hasComment;
 	
 	/**
 	 * main
@@ -54,7 +55,8 @@ public class Interface {
 				path = reader.getSelectedFile();
 				filename = path.getName();
 				calendar.read(filename);
-			} 		
+			} 
+			
 		}
 		
 		// If more than one event file has been read, AddComment class is called to sort by 
@@ -62,9 +64,12 @@ public class Interface {
 		if(calendar.getEventArray().size() > 1) {
 			AddComment ac = new AddComment();
 			ac.addComment(calendar);
-		}
+			//setHasComment(true);
+			//calendar.write("newCal");
+		}		
 		
-		//displaying newly read events for user, sorted and with comments
+		//Displaying newly read events for user, sorted and with comments. Only works with 
+		//	events created by this calendar.
 		JOptionPane filesRead = new JOptionPane();
 		for (int i = 0; i < calendar.getEventArray().size(); i++) {
 			Event e = calendar.getEventArray().get(i);
@@ -78,10 +83,13 @@ public class Interface {
 			filesRead.setMessageType(JOptionPane.INFORMATION_MESSAGE);
 			JDialog dialog = filesRead.createDialog(null, "Event " + (i+1));
 			dialog.setVisible(true);
-		}
-				
 			
-		while (JOptionPane.showConfirmDialog(null, "Would you like to create a new event file?"
+			calendar.write("newCal");
+						
+		}	
+		
+			
+		if (JOptionPane.showConfirmDialog(null, "Would you like to create a new event file?"
 				, "file", JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION) {
 					
 			// ask information to setup base event
@@ -180,8 +188,8 @@ public class Interface {
 			"Central",
 			"Mountain",
 			"Pacific",
-			"Alaska",
-			"Hawaii"	
+			"Alaskan",
+			"Hawaiian"	
 		};
 		return new String[] {
 			(String) JOptionPane.showInputDialog(null, "Please select a timezone", "Timezone", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0])
@@ -227,6 +235,6 @@ public class Interface {
 	public static boolean getGeoInfo() { return hasGeoInfo; }
 	private static void setClassInfo(boolean b) { hasClassInfo = b; }
 	public static boolean getClassInfo() { return hasClassInfo; }
-	public static void setTzInfo(boolean b) { hasTZInfo = b; }
+	static void setTzInfo(boolean b) { hasTZInfo = b; }
 	public static boolean getTzInfo() { return hasTZInfo; }
 }
